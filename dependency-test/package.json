@@ -1,0 +1,11 @@
+{
+  "name": "vulnerable-demo-app",
+  "version": "1.0.0",
+  "description": "AppSec dependency scan test",
+  "dependencies": {
+    "lodash": "4.17.11",
+    "jquery": "3.4.0",
+    "express": "4.16.0",
+    "serialize-javascript": "1.4.0"
+  }
+}
