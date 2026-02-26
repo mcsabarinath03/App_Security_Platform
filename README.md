@@ -1,8 +1,4 @@
-HEAD
+# User3 - DVWA Vulnerability Integration
 
-Content from feature-xss-vulnerable branch 
-
-contant from main branch
-
-main
-# PR Test
+## Overview
+This branch introduces intentionally vulnerable code (DVWA)
