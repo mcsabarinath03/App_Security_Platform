@@ -1,8 +1,10 @@
-HEAD
+# User1 
 
-Content from feature-xss-vulnerable branch 
+ Overview
+This branch contains the HTML frontend implementation.
 
-contant from main branch
-
-main
-# PR Test
+ Files Added
+- views/dashboard.html
+- views/login.html
+- views/profile.html
+- views/settings.html 
