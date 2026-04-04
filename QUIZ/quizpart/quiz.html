@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QuizMaster Pro</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- START SCREEN -->
+  <div id="start-screen" class="screen active">
+    <div class="noise"></div>
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="start-content">
+      <div class="badge">10 Questions • 20s Each</div>
+      <h1>Football<span>Quiz</span></h1>
+      <p class="tagline">Test your football knowledge — World Cup, Champions League, Premier League, La Liga, Bundesliga, Serie A & Ligue 1.</p>
+      <button id="start-btn" class="btn-primary">Start Quiz →</button>
+    </div>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div id="quiz-screen" class="screen">
+    <div class="noise"></div>
+    <div class="quiz-header">
+      <div class="progress-wrap">
+        <div class="progress-text">Question <span id="q-number">1</span> of 10</div>
+        <div class="progress-bar"><div id="progress-fill"></div></div>
+      </div>
+      <div class="timer-box">
+        <svg class="timer-ring" viewBox="0 0 36 36">
+          <circle class="ring-bg" cx="18" cy="18" r="15.9"/>
+          <circle id="ring-fill" class="ring-fg" cx="18" cy="18" r="15.9"/>
+        </svg>
+        <span id="timer-display">20</span>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="category-tag" id="category-tag">Category</div>
+      <h2 id="question-text">Question goes here?</h2>
+    </div>
+
+    <div class="options-grid" id="options-grid"></div>
+
+    <div class="score-bar">
+      Score: <strong id="live-score">0</strong>
+    </div>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div id="result-screen" class="screen">
+    <div class="noise"></div>
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="result-content">
+      <div id="result-emoji" class="result-emoji">🎉</div>
+      <h2 id="result-title">Well Done!</h2>
+      <div class="score-display">
+        <span id="final-score">0</span>
+        <span class="score-total">/ 10</span>
+      </div>
+      <p id="result-message">Great performance!</p>
+      <div class="result-stats">
+        <div class="stat"><span id="stat-correct">0</span><label>Correct</label></div>
+        <div class="stat"><span id="stat-wrong">0</span><label>Wrong</label></div>
+        <div class="stat"><span id="stat-skipped">0</span><label>Skipped</label></div>
+      </div>
+      <button id="restart-btn" class="btn-primary">Play Again →</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Session guard — redirect to login if not logged in
+    if (!localStorage.getItem('qm_session')) {
+      window.location.href = 'login.html';
+    }
+
+    // Show username on start screen
+    const session = JSON.parse(localStorage.getItem('qm_session') || '{}');
+    if (session.name) {
+      const badge = document.querySelector('.badge');
+      if (badge) badge.textContent = `👋 Hey, ${session.name}! • 10 Questions • 20s Each`;
+    }
+
+    // Logout
+    function logout() {
+      localStorage.removeItem('qm_session');
+      window.location.href = 'login.html';
+    }
+  </script>
+  <button onclick="logout()" style="
+    position:fixed; top:20px; right:20px; z-index:999;
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
+    color:#9a9adc; font-family:'DM Sans',sans-serif; font-size:0.8rem;
+    padding:8px 16px; border-radius:100px; cursor:pointer;
+    transition:all 0.2s;
+  " onmouseover="this.style.color='#f0eff8'" onmouseout="this.style.color='#7a7a9a'">
+    Logout
+  </button>
+</body>
+</html>
