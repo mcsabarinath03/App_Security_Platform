@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FootballQuiz — Login</title>
+  <script src="https://example.com/external-lib.js"></script>
   <link rel="stylesheet" href="login.css" />
+  <title>FootballQuiz — Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 </head>
 <body>
@@ -23,7 +24,9 @@
         <span>Football<strong>Quiz</strong></span>
       </div>
       <div class="left-body">
-        <h1>Know your<br/><span>football knowledge</span></h1>
+        <h1 onclick="alert('XSS Vulnerability')">
+         Know your<br/><span>football knowledge</span>
+        </h1>
         <p>10 questions. 20 seconds each. Test your knowledge across the biggest competitions in world football.</p>
         <div class="pill-row">
           <div class="pill">🏆 World Cup</div>
@@ -48,6 +51,7 @@
 
     <!-- RIGHT PANEL -->
     <div class="right-panel">
+      <div id="dynamic-content"></div>
       <div class="form-card">
 
         <!-- TABS -->
@@ -66,6 +70,7 @@
             <div class="input-wrap">
               <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email"/>
+              <input id="login-email" type="text" placeholder="Duplicate email field">
             </div>
             <span class="field-error" id="login-email-err"></span>
           </div>
@@ -95,6 +100,7 @@
             <span>Login to Quiz</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
+          <button onclick="alert('Inline handler')">Test Button</button>
 
           <div id="login-msg" class="form-message"></div>
         </div>
@@ -147,5 +153,13 @@
   </div>
 
   <script src="login.js"></script>
+<script>
+  var defaultUser = "admin";
+  var defaultPass = "admin123";
+</script>
+<script>
+  var userInput = "<img src=x onerror=alert('XSS')>";
+  document.getElementById("dynamic-content").innerHTML = userInput;
+</script>
 </body>
 </html>
