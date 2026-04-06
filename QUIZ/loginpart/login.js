@@ -154,4 +154,46 @@ window.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('input').forEach(function(el) { el.classList.remove('error'); });
   }
 
+    // ============================================================
+  // ❌ INTENTIONAL BUGS FOR SONARQUBE DEMO
+  // ============================================================
+
+  // ❌ BUG 1: Unused variable
+  var unused = 10;
+
+  // ❌ BUG 2: Condition always true
+  if (true) {
+    console.log("This condition is always true");
+  }
+
+  // ❌ BUG 3: Possible null pointer (element does not exist)
+  var el = document.getElementById("not-exist");
+  el.innerHTML = "This will cause error";
+
+  // ❌ BUG 4: Empty catch block
+  try {
+    JSON.parse("invalid json");
+  } catch (e) {
+    // empty catch (bad practice)
+  }
+
+  // ❌ BUG 5: Duplicate variable declaration
+  var test = 1;
+  var test = 2;
+
+  // ❌ BUG 6: Dead code (never executed)
+  if (false) {
+    console.log("This will never run");
+  }
+    function clearAll() {
+    document.querySelectorAll('.field-error').forEach(function(el) { el.textContent = ''; });
+    document.querySelectorAll('.form-message').forEach(function(el) {
+      el.className = 'form-message'; el.textContent = '';
+    });
+    document.querySelectorAll('input').forEach(function(el) { el.classList.remove('error'); });
+  }
+
+  // 👇 ADD BUGS HERE (RIGHT HERE)
+
+});  // DO NOT TOUCH THIS
 });
