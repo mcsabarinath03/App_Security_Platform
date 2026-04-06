@@ -155,45 +155,34 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 
     // ============================================================
-  // ❌ INTENTIONAL BUGS FOR SONARQUBE DEMO
-  // ============================================================
+// ❌ INTENTIONAL BUGS FOR SONARQUBE DEMO
+// ============================================================
 
-  // ❌ BUG 1: Unused variable
-  var unused = 10;
+// ❌ BUG 1: Possible null error
+document.getElementById("not-exist").innerHTML = "error";
 
-  // ❌ BUG 2: Condition always true
-  if (true) {
-    console.log("This condition is always true");
-  }
+// ❌ BUG 2: Always true condition
+if (true) {
+  console.log("always runs");
+}
 
-  // ❌ BUG 3: Possible null pointer (element does not exist)
-  var el = document.getElementById("not-exist");
-  el.innerHTML = "This will cause error";
+// ❌ BUG 3: Dead code
+if (false) {
+  console.log("never runs");
+}
 
-  // ❌ BUG 4: Empty catch block
-  try {
-    JSON.parse("invalid json");
-  } catch (e) {
-    // empty catch (bad practice)
-  }
+// ❌ BUG 4: Empty catch block
+try {
+  JSON.parse("invalid");
+} catch (e) {}
 
-  // ❌ BUG 5: Duplicate variable declaration
-  var test = 1;
-  var test = 2;
+// ❌ BUG 5: Duplicate variable
+var x = 10;
+var x = 20;
 
-  // ❌ BUG 6: Dead code (never executed)
-  if (false) {
-    console.log("This will never run");
-  }
-    function clearAll() {
-    document.querySelectorAll('.field-error').forEach(function(el) { el.textContent = ''; });
-    document.querySelectorAll('.form-message').forEach(function(el) {
-      el.className = 'form-message'; el.textContent = '';
-    });
-    document.querySelectorAll('input').forEach(function(el) { el.classList.remove('error'); });
-  }
-
-  // 👇 ADD BUGS HERE (RIGHT HERE)
-
-});  // DO NOT TOUCH THIS
+// ❌ BUG 6: Unused variable
+var unused = 123;
+  function clearAll() {
+  ...
+}
 });
