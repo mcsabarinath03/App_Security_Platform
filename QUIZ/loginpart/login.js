@@ -182,7 +182,4 @@ var x = 20;
 
 // ❌ BUG 6: Unused variable
 var unused = 123;
-  function clearAll() {
-  ...
-}
 });
