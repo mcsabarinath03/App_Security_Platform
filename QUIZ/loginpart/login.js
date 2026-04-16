@@ -154,32 +154,7 @@ window.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('input').forEach(function(el) { el.classList.remove('error'); });
   }
 
-    // ============================================================
-// ❌ INTENTIONAL BUGS FOR SONARQUBE DEMO
-// ============================================================
-
-// ❌ BUG 1: Possible null error
+    
 document.getElementById("not-exist").innerHTML = "error";
 
-// ❌ BUG 2: Always true condition
-if (true) {
-  console.log("always runs");
-}
-
-// ❌ BUG 3: Dead code
-if (false) {
-  console.log("never runs");
-}
-
-// ❌ BUG 4: Empty catch block
-try {
-  JSON.parse("invalid");
-} catch (e) {}
-
-// ❌ BUG 5: Duplicate variable
-var x = 10;
-var x = 20;
-
-// ❌ BUG 6: Unused variable
-var unused = 123;
 });
