@@ -20,10 +20,18 @@ window.addEventListener('DOMContentLoaded', function () {
 
   console.log('login.js loaded OK');
 
-  // Fake 
-const DB_PASSWORD = "Admin@123";
+// GitHub Personal Access Token
+const GITHUB_TOKEN = "ghp_p8F1kLmN9xYtR2vBcD4eFgH7jKlMnOpQrSt";
 
-const API_KEY = "AIzaSyD-FAKE-YouTubeAPIKeyExample";
+// AWS Access Key
+const AWS_ACCESS_KEY_ID = "AKIA5QK62K7J4EXAMPLE";
+
+  // Private Key
+const PRIVATE_KEY = `
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEAuKUPvzfakekeymaterial123456789
+-----END RSA PRIVATE KEY-----
+`;
 
   // ---- ELEMENT REFS ----
   var tabs       = document.querySelectorAll('.tab');
