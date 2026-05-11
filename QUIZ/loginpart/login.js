@@ -20,6 +20,11 @@ window.addEventListener('DOMContentLoaded', function () {
 
   console.log('login.js loaded OK');
 
+  // Fake 
+const DB_PASSWORD = "Admin@123";
+
+const API_KEY = "AIzaSyD-FAKE-YouTubeAPIKeyExample";
+
   // ---- ELEMENT REFS ----
   var tabs       = document.querySelectorAll('.tab');
   var loginForm  = document.getElementById('login-form');
