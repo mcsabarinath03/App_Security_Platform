@@ -5,9 +5,9 @@
 // Clear any broken session data on arrival
 (function cleanSession() {
   try {
-    var raw = localStorage.getItem('qm_session');
+    let raw = localStorage.getItem('qm_session');
     if (raw) {
-      var s = JSON.parse(raw);
+      let s = JSON.parse(raw);
       if (!s || !s.name || !s.email) localStorage.removeItem('qm_session');
     }
   } catch (e) {
@@ -20,25 +20,12 @@ window.addEventListener('DOMContentLoaded', function () {
 
   console.log('login.js loaded OK');
 
-// GitHub Personal Access Token
-const GITHUB_TOKEN = "ghp_p8F1kLmN9xYtR2vBcD4eFgH7jKlMnOpQrSt";
-
-// AWS Access Key
-const AWS_ACCESS_KEY_ID = "AKIA5QK62K7J4EXAMPLE";
-
-  // Private Key
-const PRIVATE_KEY = `
------BEGIN RSA PRIVATE KEY-----
-MIIEowIBAAKCAQEAuKUPvzfakekeymaterial123456789
------END RSA PRIVATE KEY-----
-`;
-
   // ---- ELEMENT REFS ----
-  var tabs       = document.querySelectorAll('.tab');
-  var loginForm  = document.getElementById('login-form');
-  var signupForm = document.getElementById('signup-form');
-  var loginBtn   = document.getElementById('login-btn');
-  var signupBtn  = document.getElementById('signup-btn');
+  let tabs       = document.querySelectorAll('.tab');
+  let loginForm  = document.getElementById('login-form');
+  let signupForm = document.getElementById('signup-form');
+  let loginBtn   = document.getElementById('login-btn');
+  let signupBtn  = document.getElementById('signup-btn');
 
   if (!loginBtn)   console.error('login-btn not found in HTML');
   if (!signupBtn)  console.error('signup-btn not found in HTML');
@@ -64,7 +51,7 @@ MIIEowIBAAKCAQEAuKUPvzfakekeymaterial123456789
   // ---- SHOW / HIDE PASSWORD ----
   document.querySelectorAll('.toggle-pass').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      var input = document.getElementById(btn.dataset.target);
+      let input = document.getElementById(btn.dataset.target);
       if (input) input.type = input.type === 'password' ? 'text' : 'password';
     });
   });
@@ -72,10 +59,10 @@ MIIEowIBAAKCAQEAuKUPvzfakekeymaterial123456789
   // ---- SIGN UP ----
   signupBtn.addEventListener('click', function() {
     clearAll();
-    var name  = document.getElementById('signup-name').value.trim();
-    var email = document.getElementById('signup-email').value.trim();
-    var pass  = document.getElementById('signup-pass').value;
-    var valid = true;
+    let name  = document.getElementById('signup-name').value.trim();
+    let email = document.getElementById('signup-email').value.trim();
+    let pass  = document.getElementById('signup-pass').value;
+    let valid = true;
 
     if (!name) { setError('signup-name-err', 'Please enter your name.'); valid = false; }
     if (!email || !validEmail(email)) { setError('signup-email-err', 'Enter a valid email.'); valid = false; }
@@ -98,16 +85,16 @@ MIIEowIBAAKCAQEAuKUPvzfakekeymaterial123456789
   // ---- LOGIN ----
   loginBtn.addEventListener('click', function() {
     clearAll();
-    var email = document.getElementById('login-email').value.trim();
-    var pass  = document.getElementById('login-pass').value;
-    var valid = true;
+    let email = document.getElementById('login-email').value.trim();
+    let pass  = document.getElementById('login-pass').value;
+    let valid = true;
 
     if (!email || !validEmail(email)) { setError('login-email-err', 'Enter a valid email.'); valid = false; }
     if (!pass) { setError('login-pass-err', 'Please enter your password.'); valid = false; }
     if (!valid) return;
 
-    var users = loadUsers();
-    var user  = users.find(function(u) { return u.email === email && u.password === pass; });
+    let users = loadUsers();
+    let user  = users.find(function(u) { return u.email === email && u.password === pass; });
 
     if (!user) { setMsg('login-msg', 'error', 'Wrong email or password.'); return; }
 
@@ -119,16 +106,16 @@ MIIEowIBAAKCAQEAuKUPvzfakekeymaterial123456789
   // ---- ENTER KEY ----
   document.addEventListener('keydown', function(e) {
     if (e.key !== 'Enter') return;
-    var active = document.querySelector('.tab.active');
+    let active = document.querySelector('.tab.active');
     if (active && active.dataset.tab === 'login') loginBtn.click();
     else signupBtn.click();
   });
 
   // ---- AUTO-REDIRECT if already logged in ----
   try {
-    var existing = localStorage.getItem('qm_session');
+    let existing = localStorage.getItem('qm_session');
     if (existing) {
-      var sess = JSON.parse(existing);
+      let sess = JSON.parse(existing);
       if (sess && sess.name && sess.email) {
         window.location.href = 'quiz.html';
       }
@@ -136,7 +123,10 @@ MIIEowIBAAKCAQEAuKUPvzfakekeymaterial123456789
   } catch(e) { localStorage.removeItem('qm_session'); }
 
   // ============ HELPERS ============
-  function validEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+ function validEmail(e) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
+    return emailRegex.test(e);
+ }
 
   function loadUsers() {
     try { return JSON.parse(localStorage.getItem('qm_users') || '[]'); }
@@ -150,12 +140,12 @@ MIIEowIBAAKCAQEAuKUPvzfakekeymaterial123456789
   }
 
   function setError(id, msg) {
-    var el = document.getElementById(id);
+    let el = document.getElementById(id);
     if (el) el.textContent = msg;
   }
 
   function setMsg(id, type, msg) {
-    var el = document.getElementById(id);
+    let el = document.getElementById(id);
     if (el) { el.className = 'form-message ' + type; el.textContent = msg; }
   }
 
@@ -166,8 +156,4 @@ MIIEowIBAAKCAQEAuKUPvzfakekeymaterial123456789
     });
     document.querySelectorAll('input').forEach(function(el) { el.classList.remove('error'); });
   }
-
-    
-document.getElementById("not-exist").innerHTML = "error";
-
 });
