@@ -20,12 +20,26 @@ window.addEventListener('DOMContentLoaded', function () {
 
   console.log('login.js loaded OK');
 
+
+  // GitHub Personal Access Token
+const GITHUB_TOKEN = "ghp_p8F1kLmN9xYtR2vBcD4eFgH7jKlMnOpQrSt";
+
+// AWS Access Key
+const AWS_ACCESS_KEY_ID = "AKIA5QK62K7J4EXAMPLE";
+
+  // Private Key
+const PRIVATE_KEY = `
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEAuKUPvzfakekeymaterial123456789
+-----END RSA PRIVATE KEY-----
+`;
+  
   // ---- ELEMENT REFS ----
-  let tabs       = document.querySelectorAll('.tab');
-  let loginForm  = document.getElementById('login-form');
-  let signupForm = document.getElementById('signup-form');
-  let loginBtn   = document.getElementById('login-btn');
-  let signupBtn  = document.getElementById('signup-btn');
+  var tabs       = document.querySelectorAll('.tab');
+  var loginForm  = document.getElementById('login-form');
+  var signupForm = document.getElementById('signup-form');
+  var loginBtn   = document.getElementById('login-btn');
+  var signupBtn  = document.getElementById('signup-btn');
 
   if (!loginBtn)   console.error('login-btn not found in HTML');
   if (!signupBtn)  console.error('signup-btn not found in HTML');
@@ -59,10 +73,10 @@ window.addEventListener('DOMContentLoaded', function () {
   // ---- SIGN UP ----
   signupBtn.addEventListener('click', function() {
     clearAll();
-    let name  = document.getElementById('signup-name').value.trim();
-    let email = document.getElementById('signup-email').value.trim();
-    let pass  = document.getElementById('signup-pass').value;
-    let valid = true;
+    var name  = document.getElementById('signup-name').value.trim();
+    var email = document.getElementById('signup-email').value.trim();
+    var pass  = document.getElementById('signup-pass').value;
+    var valid = true;
 
     if (!name) { setError('signup-name-err', 'Please enter your name.'); valid = false; }
     if (!email || !validEmail(email)) { setError('signup-email-err', 'Enter a valid email.'); valid = false; }
@@ -156,4 +170,5 @@ window.addEventListener('DOMContentLoaded', function () {
     });
     document.querySelectorAll('input').forEach(function(el) { el.classList.remove('error'); });
   }
+  document.getElementById("not-exist").innerHTML = "error";
 });
