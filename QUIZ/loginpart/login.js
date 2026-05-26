@@ -62,6 +62,20 @@ MIIEowIBAAKCAQEAuKUPvzfakekeymaterial123456789
     });
   });
 
+function executeUserInput(input) {
+  return eval(input); 
+}
+
+executeUserInput("console.log('D')");
+
+// ============================================================
+
+  function generateToken() {
+  return Math.random().toString(36).substring(2);
+}
+
+console.log(generateToken());
+
   // ---- SHOW / HIDE PASSWORD ----
   document.querySelectorAll('.toggle-pass').forEach(function(btn) {
     btn.addEventListener('click', function() {
