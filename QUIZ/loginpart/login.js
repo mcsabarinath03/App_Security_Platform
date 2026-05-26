@@ -20,26 +20,13 @@ window.addEventListener('DOMContentLoaded', function () {
 
   console.log('login.js loaded OK');
 
-
-  // GitHub Personal Access Token
-const GITHUB_TOKEN = "ghp_p8F1kLmN9xYtR2vBcD4eFgH7jKlMnOpQrSt";
-
-// AWS Access Key
-const AWS_ACCESS_KEY_ID = "AKIA5QK62K7J4EXAMPLE";
-
-  // Private Key
-const PRIVATE_KEY = `
------BEGIN RSA PRIVATE KEY-----
-MIIEowIBAAKCAQEAuKUPvzfakekeymaterial123456789
------END RSA PRIVATE KEY-----
-`;
-  
+ 
   // ---- ELEMENT REFS ----
-  var tabs       = document.querySelectorAll('.tab');
-  var loginForm  = document.getElementById('login-form');
-  var signupForm = document.getElementById('signup-form');
-  var loginBtn   = document.getElementById('login-btn');
-  var signupBtn  = document.getElementById('signup-btn');
+  let tabs       = document.querySelectorAll('.tab');
+  let loginForm  = document.getElementById('login-form');
+  let signupForm = document.getElementById('signup-form');
+  let loginBtn   = document.getElementById('login-btn');
+  let signupBtn  = document.getElementById('signup-btn');
 
   if (!loginBtn)   console.error('login-btn not found in HTML');
   if (!signupBtn)  console.error('signup-btn not found in HTML');
@@ -62,19 +49,6 @@ MIIEowIBAAKCAQEAuKUPvzfakekeymaterial123456789
     });
   });
 
-function executeUserInput(input) {
-  return eval(input); 
-}
-
-executeUserInput("console.log('D')");
-
-// ============================================================
-
-  function generateToken() {
-  return Math.random().toString(36).substring(2);
-}
-
-console.log(generateToken());
 
   // ---- SHOW / HIDE PASSWORD ----
   document.querySelectorAll('.toggle-pass').forEach(function(btn) {
@@ -87,17 +61,17 @@ console.log(generateToken());
   // ---- SIGN UP ----
   signupBtn.addEventListener('click', function() {
     clearAll();
-    var name  = document.getElementById('signup-name').value.trim();
-    var email = document.getElementById('signup-email').value.trim();
-    var pass  = document.getElementById('signup-pass').value;
-    var valid = true;
+    let name  = document.getElementById('signup-name').value.trim();
+    let email = document.getElementById('signup-email').value.trim();
+    let pass  = document.getElementById('signup-pass').value;
+    let valid = true;
 
     if (!name) { setError('signup-name-err', 'Please enter your name.'); valid = false; }
     if (!email || !validEmail(email)) { setError('signup-email-err', 'Enter a valid email.'); valid = false; }
     if (!pass || pass.length < 6) { setError('signup-pass-err', 'Min. 6 characters.'); valid = false; }
     if (!valid) return;
 
-    var users = loadUsers();
+    let users = loadUsers();
     if (users.find(function(u) { return u.email === email; })) {
       setError('signup-email-err', 'Email already registered.');
       return;
@@ -184,5 +158,4 @@ console.log(generateToken());
     });
     document.querySelectorAll('input').forEach(function(el) { el.classList.remove('error'); });
   }
-  document.getElementById("not-exist").innerHTML = "error";
 });
